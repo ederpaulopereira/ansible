@@ -3,8 +3,9 @@
   vars:
       http_port: 80
       max_clients: 200
-    remote_user: root
+    #remote_user: root
     tasks:
+      become: true
     - name: instala última versão do nginx
       apt: name=nginx state=latest
     - name: copia o arquivo do nginx
