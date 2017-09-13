@@ -8,7 +8,7 @@
       become: true
     - name: instala última versão do nginx
       apt: name=nginx state=latest
-    - name: copia o arquivo do nginx
+    - name: copia os arquivos do nginx
       template: src=/opt/templates/nginx/nginx.conf dest=/etc/nginx/nginx.conf
       template: src=/opt/templates/nginx/sites-available/default dest=/etc/nginx/sites-available/default
       nofify:
