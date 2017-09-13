@@ -1,0 +1,19 @@
+--
+- hosts: applicationservers
+  vars:
+      http_port: 80
+      max_clients: 200
+    remote_user: root
+    tasks:
+    - name: instala última versão do nginx
+      apt: name=nginx state=latest
+    - name: copia o arquivo do nginx
+      template: src=/opt/templates/nginx/nginx.conf dest=/etc/nginx/nginx.conf
+      template: src=/opt/templates/nginx/sites-available/default dest=/etc/nginx/sites-available/default
+      nofify:
+        - restart nginx
+    - name: garante que o nginx irá subir no boot
+      service: name=nginx state=started enabled=yes
+    handlers:
+    - name: restart nginx
+      service: name=nginx state=restarted
